@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
 <body>
-        Digitale Agenda
-  </button>
+  <button onclick="playSound()">Play Sound</button>
+
+  <!-- Audio element with the sound file -->
+  <audio id="sound" src="sci-fi-sound-effect-designed-circuits-hum-24-200825.mp3"></audio>
+
+  <script>
+    function playSound() {
+      var audio = document.getElementById('sound');
+      audio.play();
+    }
+  </script>
 </body>
 </html>
