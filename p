@@ -8,8 +8,8 @@
 <body style="background-color: black">
   <table bgcolor="white" width="1250">
     <tr bgcolor="black" > 
-      <th> <a href="index.html" title=" Ga naar pagina 1"><h3 style="color:white">Pagina 1 </h3> </a>
-          <th> <a href="p.html" title=" Ga naar pagina 2"><h3 style="color:red">Pagina 2 </h3>
+      <th> <a href="index" title=" Ga naar pagina 1"><h3 style="color:white">Pagina 1 </h3> </a>
+          <th> <a href="p" title=" Ga naar pagina 2"><h3 style="color:red">Pagina 2 </h3>
           </th>
     </tr>
   </table>
