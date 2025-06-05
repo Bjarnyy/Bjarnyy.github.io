@@ -1,34 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const path = require('path');
+const { Pool } = require('pg');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-const USERS_FILE = path.join(__dirname, 'users.json');
-
-// Load users from file, or initialize empty object
-let users = {};
-try {
-  if (fs.existsSync(USERS_FILE)) {
-    const data = fs.readFileSync(USERS_FILE, 'utf8');
-    users = JSON.parse(data);
-  }
-} catch (err) {
-  console.error('Error reading users file:', err);
-  users = {};
-}
-
-// Function to save users to file synchronously
-function saveUsers() {
-  try {
-    fs.writeFileSync(USERS_FILE, JSON.stringify(users, null, 2));
-  } catch (err) {
-    console.error('Error saving users file:', err);
-  }
-}
+// Database connection pool, using DATABASE_URL environment variable
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // needed for Render PostgreSQL SSL
+  },
+});
 
 // CORS configuration - allow your GitHub Pages domain
 const corsOptions = {
@@ -42,8 +26,21 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.options('*', cors(corsOptions));
 
+// Create users table if it doesn't exist
+async function createUsersTable() {
+  const query = `
+    CREATE TABLE IF NOT EXISTS users (
+      id SERIAL PRIMARY KEY,
+      username VARCHAR(255) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL
+    );
+  `;
+  await pool.query(query);
+}
+createUsersTable().catch(err => console.error('Error creating users table:', err));
+
 // Signup endpoint
-app.post('/signup', (req, res) => {
+app.post('/signup', async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -52,22 +49,24 @@ app.post('/signup', (req, res) => {
 
   const lowerUsername = username.toLowerCase();
 
-  // Check if username already exists (case-insensitive)
-  if (users[lowerUsername]) {
-    return res.status(409).json({ message: 'Username already exists.' });
+  try {
+    // Check if username already exists
+    const result = await pool.query('SELECT * FROM users WHERE username = $1', [lowerUsername]);
+    if (result.rows.length > 0) {
+      return res.status(409).json({ message: 'Username already exists.' });
+    }
+
+    // Insert new user
+    await pool.query('INSERT INTO users (username, password) VALUES ($1, $2)', [lowerUsername, password]);
+    return res.status(201).json({ message: 'Signup successful.' });
+  } catch (err) {
+    console.error('Error during signup:', err);
+    return res.status(500).json({ message: 'Internal server error.' });
   }
-
-  // Add new user (store original username for display)
-  users[lowerUsername] = { original: username, password };
-
-  // Save users to file
-  saveUsers();
-
-  return res.status(201).json({ message: 'Signup successful.' });
 });
 
 // Login endpoint
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   if (!username || !password) {
@@ -75,12 +74,23 @@ app.post('/login', (req, res) => {
   }
 
   const lowerUsername = username.toLowerCase();
-  const user = users[lowerUsername];
 
-  if (user && user.password === password) {
-    return res.json({ message: 'Login successful.', username: user.original });
-  } else {
-    return res.status(401).json({ message: 'Invalid username or password.' });
+  try {
+    const result = await pool.query('SELECT * FROM users WHERE username = $1', [lowerUsername]);
+
+    if (result.rows.length === 0) {
+      return res.status(401).json({ message: 'Invalid username or password.' });
+    }
+
+    const user = result.rows[0];
+    if (user.password === password) {
+      return res.json({ message: 'Login successful.', username: user.username });
+    } else {
+      return res.status(401).json({ message: 'Invalid username or password.' });
+    }
+  } catch (err) {
+    console.error('Error during login:', err);
+    return res.status(500).json({ message: 'Internal server error.' });
   }
 });
 
