@@ -1,28 +1,35 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// CORS options allowing only your frontend domain
 const corsOptions = {
-  origin: 'https://bjarnyy.github.io', // your GitHub Pages domain
-  optionsSuccessStatus: 200,
+  origin: 'https://bjarnyy.github.io',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  optionsSuccessStatus: 204,
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));  // Enable CORS for all routes with config
 app.use(bodyParser.json());
 
-// Store users as { lowerUsername: { original, password } }
+// Handle OPTIONS preflight requests for all routes
+app.options('*', cors(corsOptions));
+
+// In-memory users store: key = lowercased username
 const users = {};
 
+// Signup route
 app.post('/signup', (req, res) => {
   const { username, password } = req.body;
-  if (!username || !password)
+  if (!username || !password) {
     return res.status(400).json({ message: 'Username and password required.' });
+  }
 
   const lowerUsername = username.toLowerCase();
-
   if (users[lowerUsername]) {
     return res.status(409).json({ message: 'Username already exists.' });
   }
@@ -31,10 +38,12 @@ app.post('/signup', (req, res) => {
   res.status(201).json({ message: 'Signup successful.' });
 });
 
+// Login route
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  if (!username || !password)
+  if (!username || !password) {
     return res.status(400).json({ message: 'Username and password required.' });
+  }
 
   const lowerUsername = username.toLowerCase();
   const user = users[lowerUsername];
@@ -44,6 +53,11 @@ app.post('/login', (req, res) => {
   } else {
     res.status(401).json({ message: 'Invalid username or password.' });
   }
+});
+
+// Simple test route to check backend health
+app.get('/', (req, res) => {
+  res.send('Backend is live!');
 });
 
 app.listen(PORT, () => {
