@@ -6,14 +6,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: 'https://bjarnyy.github.io',
+  origin: 'https://bjarnyy.github.io', // your GitHub Pages domain
   optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
-// Users stored as { lowerUsername: { original, password } }
+// Store users as { lowerUsername: { original, password } }
 const users = {};
 
 app.post('/signup', (req, res) => {

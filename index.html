@@ -1,42 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Welcome</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="refresh" content="0; url=login.html" />
+  <title>Redirecting...</title>
 </head>
 <body>
-  <h1>Welcome to Bjarnyy's Site</h1>
-  <p id="welcome"></p>
-  <button id="logoutBtn" style="display:none;">Logout</button>
-  <p>
-    <a href="login.html" id="loginLink">Log In</a> |
-    <a href="signup.html" id="signupLink">Sign Up</a>
-  </p>
-
-  <script>
-    const user = localStorage.getItem('loggedInUser');
-    const welcomeEl = document.getElementById('welcome');
-    const logoutBtn = document.getElementById('logoutBtn');
-    const loginLink = document.getElementById('loginLink');
-    const signupLink = document.getElementById('signupLink');
-
-    if (user) {
-      welcomeEl.textContent = `Logged in as ${user}`;
-      logoutBtn.style.display = 'inline-block';
-      loginLink.style.display = 'none';
-      signupLink.style.display = 'none';
-
-      logoutBtn.onclick = () => {
-        localStorage.removeItem('loggedInUser');
-        window.location.reload();
-      };
-    } else {
-      welcomeEl.textContent = 'You are not logged in.';
-      logoutBtn.style.display = 'none';
-      loginLink.style.display = 'inline';
-      signupLink.style.display = 'inline';
-    }
-  </script>
+  <p>If you are not redirected, <a href="login.html">click here to log in</a>.</p>
 </body>
 </html>

@@ -1,6 +1,6 @@
 const backendURL = 'https://bjarnyy-backend.onrender.com';
 
-// Signup handler
+// Signup form handler
 async function signup(event) {
   event.preventDefault();
   const username = document.getElementById('username').value.trim();
@@ -13,18 +13,18 @@ async function signup(event) {
       body: JSON.stringify({ username, password }),
     });
     if (res.ok) {
-      alert('Signup successful! You can now login.');
+      alert('Signup successful! Please log in.');
       window.location.href = 'login.html';
     } else {
       const data = await res.json();
       alert('Signup failed: ' + data.message);
     }
-  } catch (e) {
-    alert('Error: ' + e.message);
+  } catch (err) {
+    alert('Error: ' + err.message);
   }
 }
 
-// Login handler
+// Login form handler
 async function login(event) {
   event.preventDefault();
   const username = document.getElementById('username').value.trim();
@@ -36,51 +36,41 @@ async function login(event) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),
     });
+
     if (res.ok) {
       const data = await res.json();
-      onLoginSuccess(data.username);
+      localStorage.setItem('loggedInUser', data.username);
+      window.location.href = 'home.html';
     } else {
       const data = await res.json();
       alert('Login failed: ' + data.message);
     }
-  } catch (e) {
-    alert('Error: ' + e.message);
+  } catch (err) {
+    alert('Error: ' + err.message);
   }
 }
 
-// Called after successful login/signup to store login state and redirect
-function onLoginSuccess(username) {
-  localStorage.setItem('loggedInUser', username);
-  window.location.href = 'home.html';
-}
-
-// On home page, check login state and show username + logout button
+// Check login status on home page
 function checkLogin() {
   const user = localStorage.getItem('loggedInUser');
   const welcomeEl = document.getElementById('welcome');
   const logoutBtn = document.getElementById('logoutBtn');
 
   if (user) {
-    if (welcomeEl && logoutBtn) {
-      welcomeEl.textContent = `Welcome, ${user}!`;
-      welcomeEl.style.display = 'block';
-      logoutBtn.style.display = 'inline-block';
+    welcomeEl.textContent = `Welcome, ${user}!`;
+    welcomeEl.style.display = 'block';
+    logoutBtn.style.display = 'inline-block';
 
-      logoutBtn.onclick = logout;
-    }
+    logoutBtn.onclick = () => {
+      localStorage.removeItem('loggedInUser');
+      window.location.href = 'login.html';
+    };
   } else {
-    // Not logged in, redirect to login page
     window.location.href = 'login.html';
   }
 }
 
-// Logout function clears localStorage and redirects to login
-function logout() {
-  localStorage.removeItem('loggedInUser');
-  window.location.href = 'login.html';
-}
-
-// Attach event listeners based on the page
+// Attach event listeners depending on the page
 window.onload = () => {
   if (document.getElementById('signupForm')) {
     document.getElementById('signupForm').addEventListener('submit', signup);
