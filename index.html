@@ -1,28 +1,42 @@
 <!DOCTYPE html>
-<html>
-<head><title>Login</title></head>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Welcome</title>
+</head>
 <body>
-  <h2>Login</h2>
-  <form id="loginForm">
-    <input type="text" id="username" placeholder="Username" required><br>
-    <input type="password" id="password" placeholder="Password" required><br>
-    <button type="submit">Login</button>
-  </form>
-  <p><a href="signup.html">Sign up</a></p>
+  <h1>Welcome to Bjarnyy's Site</h1>
+  <p id="welcome"></p>
+  <button id="logoutBtn" style="display:none;">Logout</button>
+  <p>
+    <a href="login.html" id="loginLink">Log In</a> |
+    <a href="signup.html" id="signupLink">Sign Up</a>
+  </p>
 
-  <script src="script.js"></script>
   <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
-      const result = await login(username, password);
-      if (result.success) {
-        window.location.href = 'home.html';
-      } else {
-        alert(result.message);
-      }
-    });
+    const user = localStorage.getItem('loggedInUser');
+    const welcomeEl = document.getElementById('welcome');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loginLink = document.getElementById('loginLink');
+    const signupLink = document.getElementById('signupLink');
+
+    if (user) {
+      welcomeEl.textContent = `Logged in as ${user}`;
+      logoutBtn.style.display = 'inline-block';
+      loginLink.style.display = 'none';
+      signupLink.style.display = 'none';
+
+      logoutBtn.onclick = () => {
+        localStorage.removeItem('loggedInUser');
+        window.location.reload();
+      };
+    } else {
+      welcomeEl.textContent = 'You are not logged in.';
+      logoutBtn.style.display = 'none';
+      loginLink.style.display = 'inline';
+      signupLink.style.display = 'inline';
+    }
   </script>
 </body>
 </html>
