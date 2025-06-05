@@ -1,4 +1,4 @@
-const backendURL = 'https://your-backend-name.onrender.com'; // Replace with your actual backend URL
+const backendURL = 'https://bjarnyy-backend.onrender.com'; // Replace with your actual backend URL
 
 async function signup(username, password) {
   const res = await fetch(`${backendURL}/signup`, {
