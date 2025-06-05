@@ -1,19 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Log In</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      max-width: 400px;
+      margin: auto;
+    }
+    input, button {
+      display: block;
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      font-size: 1rem;
+    }
+    .link {
+      margin-top: 1rem;
+      text-align: center;
+    }
+    .link a {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    #error {
+      color: red;
+      margin-top: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>Log In</h1>
+  <h1>Login</h1>
   <form id="loginForm">
-    <input type="text" id="username" placeholder="Username" required /><br />
-    <input type="password" id="password" placeholder="Password" required /><br />
-    <button type="submit">Log In</button>
+    <input type="text" id="username" placeholder="Username" required autocomplete="username" />
+    <input type="password" id="password" placeholder="Password" required autocomplete="current-password" />
+    <button type="submit">Login</button>
+    <div id="error"></div>
   </form>
-  <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+  <div class="link">
+    Don't have an account? <a href="signup.html">Sign up here</a>
+  </div>
 
-  <script src="script.js"></script>
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const errorDiv = document.getElementById('error');
+
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorDiv.textContent = '';
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+
+      try {
+        const res = await fetch('https://bjarnyy-backend.onrender.com/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          // Save username in localStorage to keep logged in state
+          localStorage.setItem('username', data.username);
+          // Redirect to main page (or wherever you want)
+          window.location.href = 'welcome.html';
+        } else {
+          errorDiv.textContent = data.message || 'Login failed';
+        }
+      } catch (err) {
+        errorDiv.textContent = 'Network error';
+        console.error(err);
+      }
+    });
+
+    // If already logged in, redirect to welcome page
+    if (localStorage.getItem('username')) {
+      window.location.href = 'welcome.html';
+    }
+  </script>
 </body>
 </html>
