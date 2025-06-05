@@ -1,110 +1,24 @@
-<!DOCTYPE html><html><head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>simple-auth-flow-zero</title>
+    <meta name="description" content="Lovable Generated Project" />
+    <meta name="author" content="Lovable" />
 
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta http-equiv="Expires" content="0">
+    <meta property="og:title" content="simple-auth-flow-zero" />
+    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-<title>eokeg : Leerlingen</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<!-- FIRST: STYLE SHEETS-->
-<link rel="stylesheet" type="text/css" href="css/all.css">
-<link id="bootstrap-loader" rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic&v=2.17.0">
-<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,700,600,800&v=2.17.0">
-<link rel="stylesheet" type="text/css" href="css/theme/webleerling/style.css?v=2.17.0">
-<link rel="shortcut icon" href="./favicon.ico?v=2.17.0" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="css/extensible-all.css?v=2.17.0">
-<link rel="stylesheet" type="text/css" href="css/login.css?v=2.17.0">
-<link rel="stylesheet" type="text/css" href="js/ux/grid/StatusBar.css?v=2.17.0">
-<link rel="stylesheet" type="text/css" href="js/ux/grid/LiveSearchGridPanel.css?v=2.17.0">	
-<link rel="stylesheet" type="text/css" href="css/webwisadwebleerling.css?v=2.17.0">
-<link rel="stylesheet" type="text/css" href="css/extensible-all.css?v=2.17.0">
-<link rel="stylesheet" type="text/css" href="css/extensible-kleuren.css?v=2.17.0">
-<link rel="stylesheet" type="text/css" href="css/schoolware.css?v=2.17.0">
-<!-- SECOND: SCRIPTS -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  </head>
 
-<script src="js/MicrosoftTeams.min.js" crossorigin="anonymous"></script>
-<!-- Check before upgrading your ADAL version, as this sample depends on an internal function to authenticate silently -->
-<script src="js/adal.min.js" crossorigin="anonymous"></script>
-<script>
-	INTEAMS = false;
-	microsoftTeams.initialize();     	
-	microsoftTeams.getContext((context) => {		
-		INTEAMS = true;
-	});	
-</script>
-
-<script type="text/javascript" src="js/ext-all.js"></script>
-<script type="text/javascript" src="js/ext-lang-wisa.js"></script>
-<script type="text/javascript" src="js/cdn.jsdelivr.net_npm_xss%401.0.14_dist_xss.min.js"></script>
-
-<!-- Only after ExtJS is loaded, Ext.ns is needed -->
-
-<!-- CDNConfig start -->
-<script>
-Ext.ns("WISA.CacheFlyConfig");
-WISA.CacheFlyConfig.appURL="https://wisa.cachefly.net/projects/webleerling/2.17.0/";
-WISA.CacheFlyConfig.externalsURL="https://wisa.cachefly.net/external/";
-</script>
-<!-- CDNConfig end -->
-
-
-<script>LOGGING = false;</script>
-
-<style>
-.daterangepicker {
-    display: none;
-}
-</style>
-
-<script type="text/javascript" src="js/extensible-all.js"></script>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src="js/jquery.dotdotdot.js"></script>
-<script type="text/javascript" src="js/ux/CheckColumn.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/SelectionColumn.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/RowExpander.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/MultiCellSelectionModel.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/StatusBar.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/LiveSearchGridPanel.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/FiltersFeature.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/filter/Filter.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/filter/StringFilter.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/filter/DateFilter.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/filter/ListFilter.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/filter/NumericFilter.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/filter/BooleanFilter.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/menu/ListMenu.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/grid/menu/RangeMenu.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/ux/Clumpy.js?v=2.17.0"></script>
-<script type="text/javascript"> var clumpy = new Clumpy(); </script>
-<script type="text/javascript" src="js/wisa/wisa.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/wisacalendar.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/wisacalendarWebLeerling.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/menu.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/webleerling.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/start.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/llmenuagenda.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/llagenda.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/llagendaVoorkeuren.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/lltakentoetsen.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/llagendaSecundairVrij.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/llagendaSecundairDag.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/wisacalendarFicheSecundairLes.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/llagendaActiviteit.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/llkaart.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/myprofilevue.js?v=2.17.0"></script>
-
-<script type="text/javascript" src="js/Forms/llEvaluaties.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/Forms/llEvaluatiesMenu.js?v=2.17.0"></script>
-
-<script type="text/javascript" src="js/kleurenpicker.js?v=2.17.0"></script>
-<script type="text/javascript" src="js/admincommon.js?v=2.17.0"></script>
-<!--
-<script type="text/javascript" src="js/Forms/config.js"></script>
--->
-</head>
-<body>
- <span id="app-msg" class="x-hidden"></span>
-
-
-</body></html>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
