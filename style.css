@@ -1,6 +1,6 @@
 body {
   background-color: #ffd1dc;
-  background-image: url('726bf055-141e-4eea-8ce9-5d841e4579f9.png');
+  background-image: url('bb1e3c9d-1665-465f-8040-a21790ade288.png');
   background-repeat: repeat;
   background-size: 150px;
   font-family: Arial, sans-serif;
@@ -74,22 +74,6 @@ p {
   margin: 0 0 30px;
 }
 
-/* 🌟 Glowing Eleni effect */
-.glow {
-  color: #ff80bf;
-  text-shadow: 0 0 5px #ff80bf, 0 0 10px #ff4db8, 0 0 20px #ff1aa3, 0 0 30px #ff0080;
-  animation: glow 2s ease-in-out infinite alternate;
-}
-
-@keyframes glow {
-  from {
-    text-shadow: 0 0 5px #ff80bf, 0 0 10px #ff4db8, 0 0 20px #ff1aa3, 0 0 30px #ff0080;
-  }
-  to {
-    text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff66b2, 0 0 30px #ff3399, 0 0 40px #ff0080;
-  }
-}
-
 .music-player {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
@@ -102,6 +86,39 @@ p {
   color: #333;
   font-size: 14px;
   margin: 15px 0 0;
+}
+
+.glow-name {
+  display: inline-block;
+  color: #ff4da6;
+  font-weight: bold;
+  font-size: 24px;
+  animation: glow-name 1.8s ease-in-out infinite alternate;
+  text-shadow:
+    0 0 5px #ff80bf,
+    0 0 10px #ff4db8,
+    0 0 15px #ff1aa3,
+    0 0 20px #ff0080,
+    0 0 25px #ff0080;
+}
+
+@keyframes glow-name {
+  from {
+    text-shadow:
+      0 0 5px #ff80bf,
+      0 0 10px #ff4db8,
+      0 0 15px #ff1aa3,
+      0 0 20px #ff0080,
+      0 0 25px #ff0080;
+  }
+  to {
+    text-shadow:
+      0 0 10px #ff99cc,
+      0 0 20px #ff66b2,
+      0 0 30px #ff3399,
+      0 0 40px #ff0080,
+      0 0 50px #ff0080;
+  }
 }
 
 @keyframes heartbeat {
