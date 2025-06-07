@@ -74,6 +74,22 @@ p {
   margin: 0 0 30px;
 }
 
+/* 🌟 Glowing Eleni effect */
+.glow {
+  color: #ff80bf;
+  text-shadow: 0 0 5px #ff80bf, 0 0 10px #ff4db8, 0 0 20px #ff1aa3, 0 0 30px #ff0080;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #ff80bf, 0 0 10px #ff4db8, 0 0 20px #ff1aa3, 0 0 30px #ff0080;
+  }
+  to {
+    text-shadow: 0 0 10px #ff99cc, 0 0 20px #ff66b2, 0 0 30px #ff3399, 0 0 40px #ff0080;
+  }
+}
+
 .music-player {
   background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
