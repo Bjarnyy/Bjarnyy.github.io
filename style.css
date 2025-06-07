@@ -2,7 +2,7 @@ body {
   background-color: #ffd1dc;
   background-image: url('726bf055-141e-4eea-8ce9-5d841e4579f9.png');
   background-repeat: repeat;
-  background-size: 150px; /* adjust to fit pattern nicely */
+  background-size: 150px;
   font-family: Arial, sans-serif;
   text-align: center;
   display: flex;
@@ -11,6 +11,8 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .heart {
@@ -66,6 +68,27 @@ p {
   font-size: 24px;
   font-weight: bold;
   margin-top: 10px;
+}
+
+.music-player {
+  margin-top: 30px;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.music-player h3 {
+  color: #d23669;
+  margin-bottom: 15px;
+}
+
+.music-player p {
+  color: #333;
+  font-size: 16px;
+  margin-top: 15px;
 }
 
 @keyframes heartbeat {
