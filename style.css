@@ -4,24 +4,28 @@ body {
   background-repeat: repeat;
   background-size: 150px;
   font-family: Arial, sans-serif;
-  text-align: center;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  margin: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 500px;
   padding: 20px;
-  box-sizing: border-box;
+  text-align: center;
 }
 
 .heart {
-  width: 120px; /* Reduced from 180px */
-  height: 120px; /* Reduced from 180px */
+  width: 120px;
+  height: 120px;
   background-color: red;
   position: relative;
   transform: rotate(-45deg);
-  margin: 20px auto;
+  margin: 0 auto 30px;
   animation: heartbeat 1.5s infinite;
   display: flex;
   justify-content: center;
@@ -31,26 +35,26 @@ body {
 .heart:before,
 .heart:after {
   content: "";
-  width: 120px; /* Reduced from 180px */
-  height: 120px; /* Reduced from 180px */
+  width: 120px;
+  height: 120px;
   background-color: red;
   border-radius: 50%;
   position: absolute;
 }
 
 .heart:before {
-  top: -60px; /* Adjusted from -90px */
+  top: -60px;
   left: 0;
 }
 
 .heart:after {
   top: 0;
-  left: 60px; /* Adjusted from 90px */
+  left: 60px;
 }
 
 .heart-text {
   color: white;
-  font-size: 24px; /* Reduced from 36px */
+  font-size: 24px;
   font-weight: bold;
   transform: rotate(45deg);
   position: relative;
@@ -59,57 +63,35 @@ body {
 
 h1 {
   color: #d23669;
-  font-size: 28px; /* Reduced from 36px */
-  margin-top: 30px;
-  margin-bottom: 10px;
+  font-size: 28px;
+  margin: 20px 0 10px;
 }
 
 p {
   color: #d23669;
-  font-size: 18px; /* Reduced from 24px */
+  font-size: 18px;
   font-weight: bold;
-  margin-top: 0;
-  margin-bottom: 20px;
+  margin: 0 0 30px;
 }
 
 .music-player {
   background-color: rgba(255, 255, 255, 0.7);
-  padding: 15px;
+  padding: 20px;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 350px; /* Slightly reduced */
   margin-top: 20px;
-}
-
-.music-player h3 {
-  color: #d23669;
-  margin-top: 0;
-  margin-bottom: 12px;
-  font-size: 20px;
 }
 
 .music-player p {
   color: #333;
-  font-size: 14px; /* Reduced from 16px */
-  margin-top: 12px;
-  margin-bottom: 0;
+  font-size: 14px;
+  margin: 15px 0 0;
 }
 
 @keyframes heartbeat {
-  0% {
-    transform: rotate(-45deg) scale(1);
-  }
-  25% {
-    transform: rotate(-45deg) scale(1.1);
-  }
-  50% {
-    transform: rotate(-45deg) scale(1);
-  }
-  75% {
-    transform: rotate(-45deg) scale(1.1);
-  }
-  100% {
-    transform: rotate(-45deg) scale(1);
-  }
+  0% { transform: rotate(-45deg) scale(1); }
+  25% { transform: rotate(-45deg) scale(1.1); }
+  50% { transform: rotate(-45deg) scale(1); }
+  75% { transform: rotate(-45deg) scale(1.1); }
+  100% { transform: rotate(-45deg) scale(1); }
 }
